@@ -1,0 +1,21 @@
+{
+  "name": "projeto18-valex",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/celso-patiri/18-Valex.git",
+  "author": "<celsobenedetti2@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/index.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.3",
+    "@types/pg": "^8.6.5",
+    "nodemon": "^2.0.19",
+    "typescript": "^4.7.4"
+  }
+}
