@@ -34,7 +34,7 @@ const getCurrentYearAndMonth = () => {
 
   const year = +yearMonthDay[0].slice(2);
   const month = yearMonthDay[1];
-  return { year, month };
+  return { month, year };
 };
 
 const getExpirationDate = () => {
@@ -61,7 +61,7 @@ const createCard = async (type: TransactionTypes, employee: Employee) => {
 const findById = async (cardId: number) => cardsRepository.findById(cardId);
 
 const verifyCardExpiration = async (card: Card) => {
-  const { month: currentYear, year: currentMonth } = getCurrentYearAndMonth();
+  const { month: currentMonth, year: currentYear } = getCurrentYearAndMonth();
   const [month, year] = card.expirationDate.split("/");
 
   if (+currentYear > +year || (+currentYear === +year && +currentMonth > +month))
