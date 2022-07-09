@@ -18,6 +18,18 @@ export class UnauthorizedException extends HttpException {
   }
 }
 
+export class ForbiddenException extends HttpException {
+  constructor(response?: Res) {
+    super(403, response || "Forbidden");
+  }
+}
+
+export class NotFoundException extends HttpException {
+  constructor(response?: Res) {
+    super(404, response || "Not Found");
+  }
+}
+
 export class UnprocessableEntityException extends HttpException {
   constructor(response?: Res) {
     super(422, response || "Unprocessable Entity");

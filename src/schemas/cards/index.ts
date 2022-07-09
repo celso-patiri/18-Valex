@@ -1,4 +1,4 @@
-export enum cardTypes {
+export enum TransactionTypes {
   groceries = "groceries",
   restaurants = "restaurants",
   transport = "transport",
