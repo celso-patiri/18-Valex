@@ -1,7 +1,7 @@
 export enum cardTypes {
-  "groceries",
-  "restaurants",
-  "transport",
-  "education",
-  "health",
+  groceries = "groceries",
+  restaurants = "restaurants",
+  transport = "transport",
+  education = "education",
+  health = "health",
 }

@@ -1,9 +1,14 @@
 import { NextFunction, Request, Response } from "express";
-import { ZodSchema } from "zod";
+import { z } from "zod";
+import { UnprocessableEntityException } from "../../common/exceptions/http-exceptions";
 
-export default function validateBodySchema(schema: ZodSchema) {
+export default function validateBodySchema(schema: z.ZodSchema) {
   return (req: Request, _res: Response, next: NextFunction) => {
-    schema.parse(req.body);
+    try {
+      schema.parse(req.body);
+    } catch (err) {
+      throw new UnprocessableEntityException(err);
+    }
     next();
   };
 }
