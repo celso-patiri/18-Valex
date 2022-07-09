@@ -1,5 +1,5 @@
 import { connection } from "../database";
-import { TransactionTypes } from "../schemas/cards";
+import { TransactionTypes } from "../schemas/cards/types";
 import { mapObjectToUpdateQuery } from "./utils/sqlUtils";
 
 export interface Card {
@@ -25,18 +25,12 @@ export async function find() {
 }
 
 export async function findById(id: number) {
-  const result = await connection.query<Card, [number]>(
-    "SELECT * FROM cards WHERE id=$1",
-    [id],
-  );
+  const result = await connection.query<Card, [number]>("SELECT * FROM cards WHERE id=$1", [id]);
 
   return result.rows[0];
 }
 
-export async function findByTypeAndEmployeeId(
-  type: TransactionTypes,
-  employeeId: number,
-) {
+export async function findByTypeAndEmployeeId(type: TransactionTypes, employeeId: number) {
   const result = await connection.query<Card, [TransactionTypes, number]>(
     `SELECT * FROM cards WHERE type=$1 AND "employeeId"=$2`,
     [type, employeeId],
@@ -97,12 +91,10 @@ export async function insert(cardData: CardInsertData) {
 }
 
 export async function update(id: number, cardData: CardUpdateData) {
-  const { objectColumns: cardColumns, objectValues: cardValues } = mapObjectToUpdateQuery(
-    {
-      object: cardData,
-      offset: 2,
-    },
-  );
+  const { objectColumns: cardColumns, objectValues: cardValues } = mapObjectToUpdateQuery({
+    object: cardData,
+    offset: 2,
+  });
 
   connection.query(
     `

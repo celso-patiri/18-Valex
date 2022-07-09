@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
-import { TransactionTypes } from "../schemas/cards";
-import { Employee } from "../schemas/employee";
+import { TransactionTypes } from "../schemas/cards/types";
+import { Employee } from "../schemas/employee/types";
 import * as cardsRepository from "../repositories/cardRepository";
 import Lodash from "lodash";
 import Cryptr from "cryptr";

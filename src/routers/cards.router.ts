@@ -10,7 +10,9 @@ router.post(
   "/cards",
   validadeApiKeyHeader,
   validateBody(createCardSchema),
-  CardsController.createCard
+  CardsController.createCard,
 );
+
+router.post("/cards/:id/activate");
 
 export default router;
