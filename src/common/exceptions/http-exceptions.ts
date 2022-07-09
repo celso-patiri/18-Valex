@@ -17,3 +17,9 @@ export class UnauthorizedException extends HttpException {
     super(401, response || "Unauthorized");
   }
 }
+
+export class UnprocessableEntityException extends HttpException {
+  constructor(response?: Res) {
+    super(422, response || "Unprocessable Entity");
+  }
+}
