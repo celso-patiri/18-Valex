@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { z } from "zod";
-import { Card, TransactionTypesEnum } from "./types";
+import { Card, TransactionTypes, TransactionTypesEnum } from "./types";
 
 export const createCardSchema = z.object({
   employeeId: z.number(),
@@ -12,9 +12,16 @@ export const activateCardSchema = z.object({
   password: z.string().min(4),
 });
 
+export interface CreateCardRequest extends Request {
+  body: {
+    employeeId: number;
+    type: TransactionTypes;
+  };
+}
+
 type IdParams = { [key: string]: string } & { id: number };
 
-interface CardIdRequest extends Request {
+export interface CardIdRequest extends Request {
   params: IdParams;
 }
 
