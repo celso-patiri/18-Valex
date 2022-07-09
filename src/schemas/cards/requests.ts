@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { TransactionTypes } from ".";
+import { TransactionTypesEnum } from ".";
 
 export const createCardSchema = z.object({
   employeeId: z.number(),
-  type: z.nativeEnum(TransactionTypes),
+  type: z.nativeEnum(TransactionTypesEnum),
 });

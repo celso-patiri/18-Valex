@@ -1,6 +1,7 @@
 import { ForbiddenException } from "../common/exceptions/http-exceptions";
 import * as employeesRepository from "../repositories/employeeRepository";
 import * as cardsRepository from "../repositories/cardRepository";
+import { TransactionTypes } from "../schemas/cards";
 
 const findById = async (id: number) => {
   const employee = await employeesRepository.findById(id);
@@ -10,7 +11,7 @@ const findById = async (id: number) => {
 };
 
 const verifyCardTypeIsAvailable = async (
-  type: cardsRepository.TransactionTypes,
+  type: TransactionTypes,
   employeeId: number
 ) => {
   const card = await cardsRepository.findByTypeAndEmployeeId(type, employeeId);
