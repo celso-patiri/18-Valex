@@ -6,9 +6,4 @@ export enum TransactionTypesEnum {
   health = "health",
 }
 
-export type TransactionTypes =
-  | "groceries"
-  | "restaurant"
-  | "transport"
-  | "education"
-  | "health";
+export type TransactionTypes = "groceries" | "restaurant" | "transport" | "education" | "health";

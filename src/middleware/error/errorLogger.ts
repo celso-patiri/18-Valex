@@ -5,7 +5,7 @@ export default function errorLogger(
   error: HttpException,
   _req: Request,
   _res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   console.error({
     name: error.name,

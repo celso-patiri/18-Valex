@@ -7,7 +7,7 @@ export class HttpException extends Error {
   constructor(statusCode: number, response: Res) {
     super();
     this.name = "HttpException";
-    this.statusCode = statusCode;
+    this.statusCode = statusCode || 500;
     this.response = response || "Something went wrong";
   }
 }

@@ -5,7 +5,7 @@ export default function errorHandler(
   error: HttpException,
   _req: Request,
   res: Response,
-  _next: NextFunction
+  _next: NextFunction,
 ) {
   res.status(error.statusCode || 500).send(error);
 }
