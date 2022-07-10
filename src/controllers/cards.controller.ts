@@ -32,6 +32,7 @@ const activateCard = async (req: ActivateCardReq, res: ValidCardRes) => {
   const { cvc, password } = req.body;
 
   if (card.password) throw new UnauthorizedException("Card is already activated");
+  if (card.isVirtual) throw new ForbiddenException("Only non virtual cards can be activated");
 
   cardsService.validadeSecurityCode(cvc, card.securityCode);
   cardsService.registerPassword(id, password);
@@ -70,8 +71,9 @@ const rechargeCard = async (req: RechargeCardReq, res: ValidCardRes) => {
   const { amount } = req.body;
 
   if (card.isBlocked) throw new ForbiddenException("Card is blocked");
-  await cardsService.rechardCard(id, amount);
+  if (card.isVirtual) throw new ForbiddenException("Virtual cards cant be recharhed");
 
+  await cardsService.rechardCard(id, amount);
   res.sendStatus(204);
 };
 

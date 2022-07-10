@@ -10,6 +10,7 @@ const makePurchase = async (req: MakePurchaseReq, res: ValidCardRes) => {
   const { card } = res.locals;
 
   if (card.isBlocked) throw new ForbiddenException("Card is blocked");
+  if (card.isVirtual) throw new ForbiddenException("Virtual cards can't be used in POS purchases");
 
   cardsService.validatePassword(password, card.password);
   await businessService.validateBusinessTransactionType(businessId, card.type);
