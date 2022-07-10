@@ -1,21 +1,16 @@
 import { faker } from "@faker-js/faker";
-import { Card, TransactionTypes } from "../schemas/cards/types";
-import { Employee } from "../schemas/employee/types";
-import * as cardsRepository from "../repositories/cardRepository";
-import * as rechargesRepository from "../repositories/rechargeRepository";
-import * as paymentRepository from "../repositories/paymentRepository";
-import Lodash from "lodash";
 import Cryptr from "cryptr";
 import { ForbiddenException, UnauthorizedException } from "../common/exceptions/http-exceptions";
+import * as cardsRepository from "../repositories/cardRepository";
+import * as paymentRepository from "../repositories/paymentRepository";
+import * as rechargesRepository from "../repositories/rechargeRepository";
+import { Card, TransactionTypes } from "../schemas/cards/types";
+import { Employee } from "../schemas/employee/types";
 
 const cryptr = new Cryptr(process.env.CRYPTR_SECRET + "");
 
-const randomNumber = (max: number) => faker.datatype.number({ max }).toString();
-const formatNumberToNDigits = (number: string, n: number) => Lodash.padStart(number, n, "0"); //Fills left side of number with 0s if neceessary
-
-const fourDigits = () => formatNumberToNDigits(randomNumber(9999), 4);
-const generateCardNumber = () => `${fourDigits()} ${fourDigits()} ${fourDigits()} ${fourDigits()}`;
-const generateSecurityCode = () => formatNumberToNDigits(randomNumber(999), 3);
+const generateCardNumber = () => faker.finance.creditCardNumber();
+const generateSecurityCode = () => faker.finance.creditCardCVV();
 
 const formatCardholderName = (fullName: string) => {
   const names = fullName.split(" ");
