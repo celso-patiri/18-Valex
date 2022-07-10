@@ -11,6 +11,7 @@ import {
   ValidCardRes,
   RechargeCardReq,
   CardIdParamReq,
+  VirtualCardReq,
 } from "../schemas/cards/requests";
 import cardsService from "../services/cards.service";
 import employeesService from "../services/employees.service";
@@ -84,6 +85,15 @@ const getBalance = async (req: CardIdParamReq, res: Response) => {
   res.status(200).send(result);
 };
 
+const createVirtualCard = async (req: VirtualCardReq, res: ValidCardRes) => {
+  const { password } = req.body;
+  const { card } = res.locals;
+
+  const newCard = await cardsService.createVirtualCard(card);
+  cardsService.validatePassword(password, card.password);
+
+  res.status(201).send(newCard);
+};
 export default {
   createCard,
   activateCard,
@@ -91,4 +101,5 @@ export default {
   unblockCard,
   rechargeCard,
   getBalance,
+  createVirtualCard,
 };

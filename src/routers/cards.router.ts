@@ -1,6 +1,7 @@
 import { Router } from "express";
 import cardsController from "../controllers/cards.controller";
 import validadeApiKeyHeader from "../middleware/auth/apiKeyHeader";
+import verifyCardIsValidByBody from "../middleware/cards/verifyCardByBody";
 import verifyCardIsValidByParams from "../middleware/cards/verifyCardByParams";
 import validateBody from "../middleware/validation/zod";
 import {
@@ -8,6 +9,7 @@ import {
   passwordBodySchema,
   createCardSchema,
   rechargeCardSchema,
+  virtualCardSchema,
 } from "../schemas/cards/requests";
 
 const router = Router();
@@ -49,5 +51,12 @@ router.post(
 );
 
 router.get("/cards/:id/balance", cardsController.getBalance);
+
+router.post(
+  "/cards/virtual",
+  validateBody(virtualCardSchema),
+  verifyCardIsValidByBody,
+  cardsController.createVirtualCard,
+);
 
 export default router;

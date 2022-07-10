@@ -20,6 +20,11 @@ export const rechargeCardSchema = z.object({
   amount: z.number().gt(0),
 });
 
+export const virtualCardSchema = z.object({
+  id: z.number(),
+  password: z.string().min(4),
+});
+
 export interface CreateCardRequest extends Request {
   body: {
     employeeId: number;
@@ -61,5 +66,12 @@ export interface RechargeCardReq extends CardIdParamReq {
 export interface ValidCardRes extends Response {
   locals: {
     card: Card;
+  };
+}
+
+export interface VirtualCardReq extends Request {
+  body: {
+    cardId: number;
+    password: string;
   };
 }

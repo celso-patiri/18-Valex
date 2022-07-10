@@ -6,6 +6,7 @@ import * as paymentRepository from "../repositories/paymentRepository";
 import * as rechargesRepository from "../repositories/rechargeRepository";
 import { Card, TransactionTypes } from "../schemas/cards/types";
 import { Employee } from "../schemas/employee/types";
+import employeesService from "./employees.service";
 
 const cryptr = new Cryptr(process.env.CRYPTR_SECRET + "");
 
@@ -51,6 +52,25 @@ const createCard = async (type: TransactionTypes, employee: Employee) => {
     isVirtual: false,
     isBlocked: false,
     type,
+  });
+  return { cvc };
+};
+
+const createVirtualCard = async (originalCard: Card) => {
+  const employee = await employeesService.findById(originalCard.employeeId);
+
+  const cvc = generateSecurityCode();
+  await cardsRepository.insert({
+    employeeId: employee.id,
+    number: generateCardNumber(),
+    cardholderName: formatCardholderName(employee.fullName),
+    securityCode: cryptr.encrypt(cvc),
+    expirationDate: getExpirationDate(),
+    password: originalCard.password,
+    originalCardId: originalCard.id,
+    isVirtual: true,
+    isBlocked: false,
+    type: originalCard.type,
   });
   return { cvc };
 };
@@ -124,4 +144,5 @@ export default {
   rechardCard,
   getBalance,
   validateCardDetails,
+  createVirtualCard,
 };
