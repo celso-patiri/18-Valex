@@ -2,6 +2,7 @@ import { faker } from "@faker-js/faker";
 import { Card, TransactionTypes } from "../schemas/cards/types";
 import { Employee } from "../schemas/employee/types";
 import * as cardsRepository from "../repositories/cardRepository";
+import * as rechargesRepository from "../repositories/rechargeRepository";
 import Lodash from "lodash";
 import Cryptr from "cryptr";
 import { ForbiddenException, UnauthorizedException } from "../common/exceptions/http-exceptions";
@@ -52,7 +53,7 @@ const createCard = async (type: TransactionTypes, employee: Employee) => {
     expirationDate: getExpirationDate(),
     password: undefined,
     isVirtual: false,
-    isBlocked: true,
+    isBlocked: false,
     type,
   });
   return { cvc };
@@ -77,10 +78,27 @@ const registerPassword = async (cardId: number, password: string) => {
   await cardsRepository.update(cardId, { password: cryptr.encrypt(password) });
 };
 
+const validatePassword = (password: string, encryptedPassword?: string) => {
+  if (!encryptedPassword) throw new ForbiddenException("Card is not activated");
+  const decryptedPassword = cryptr.decrypt(encryptedPassword);
+  if (password != decryptedPassword) throw new UnauthorizedException("Invalid password");
+};
+
+const updateBlockedStatus = async (cardId: number, block: boolean) => {
+  await cardsRepository.update(cardId, { isBlocked: block });
+};
+
+const rechardCard = async (cardId: number, amount: number) => {
+  await rechargesRepository.insert({ cardId, amount });
+};
+
 export default {
   createCard,
   findById,
   verifyCardExpiration,
   validadeSecurityCode,
   registerPassword,
+  validatePassword,
+  updateBlockedStatus,
+  rechardCard,
 };

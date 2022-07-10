@@ -1,5 +1,5 @@
 import { connection } from "../database.js";
-import { TransactionTypes } from "../schemas/cards/index.js";
+import { TransactionTypes } from "../schemas/cards/types.js";
 
 export interface Business {
   id: number;
@@ -10,7 +10,7 @@ export interface Business {
 export async function findById(id: number) {
   const result = await connection.query<Business, [number]>(
     "SELECT * FROM businesses WHERE id=$1",
-    [id]
+    [id],
   );
 
   return result.rows[0];
