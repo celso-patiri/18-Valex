@@ -3,7 +3,7 @@
   <img src="https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/uh59Wh0/videoblocks-credit-card-line-drawing-animation-transparent-vector-motion-graphics-loop-line-drawing-animation-transparent-vector-motion-graphics-loop_riccca7cq_thumbnail-1080_05.png" alt="Logo" width="200">
   
   <h3 align="center">
-     Credit card benefit management API
+     Mock benefit card management API
   </h3>
     <br />
   
