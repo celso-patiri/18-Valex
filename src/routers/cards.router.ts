@@ -59,4 +59,11 @@ router.post(
   cardsController.createVirtualCard,
 );
 
+router.delete(
+  "/cards/:id",
+  validateBody(virtualCardSchema),
+  verifyCardIsValidByParams,
+  cardsController.createVirtualCard,
+);
+
 export default router;

@@ -89,11 +89,24 @@ const createVirtualCard = async (req: VirtualCardReq, res: ValidCardRes) => {
   const { password } = req.body;
   const { card } = res.locals;
 
-  const newCard = await cardsService.createVirtualCard(card);
   cardsService.validatePassword(password, card.password);
+  const newCard = await cardsService.createVirtualCard(card);
 
   res.status(201).send(newCard);
 };
+
+const deleteVirtualCard = async (req: VirtualCardReq, res: ValidCardRes) => {
+  const { password } = req.body;
+  const { card } = res.locals;
+
+  cardsService.validatePassword(password, card.password);
+
+  if (!card.isVirtual) throw new ForbiddenException("Only virtual cards can be deleted");
+  await cardsService.deleteVirtualCard(card.id);
+
+  res.sendStatus(204);
+};
+
 export default {
   createCard,
   activateCard,
@@ -102,4 +115,5 @@ export default {
   rechargeCard,
   getBalance,
   createVirtualCard,
+  deleteVirtualCard,
 };

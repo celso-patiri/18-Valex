@@ -133,6 +133,8 @@ const validateCardDetails = async (
   if (!card) throw new ForbiddenException("Invalid card details");
 };
 
+const deleteVirtualCard = async (cardId: number) => await cardsRepository.remove(cardId);
+
 export default {
   createCard,
   findById,
@@ -145,4 +147,5 @@ export default {
   getBalance,
   validateCardDetails,
   createVirtualCard,
+  deleteVirtualCard,
 };
