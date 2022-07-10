@@ -9,7 +9,7 @@ import { Employee } from "../schemas/employee/types";
 
 const cryptr = new Cryptr(process.env.CRYPTR_SECRET + "");
 
-const generateCardNumber = () => faker.finance.creditCardNumber();
+const generateCardNumber = () => faker.finance.creditCardNumber("mastercard");
 const generateSecurityCode = () => faker.finance.creditCardCVV();
 
 const formatCardholderName = (fullName: string) => {
