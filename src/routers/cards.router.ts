@@ -1,7 +1,7 @@
 import { Router } from "express";
 import cardsController from "../controllers/cards.controller";
 import validadeApiKeyHeader from "../middleware/auth/apiKeyHeader";
-import verifyCardIsValid from "../middleware/cards/verifyCard";
+import verifyCardIsValidByParams from "../middleware/cards/verifyCardByParams";
 import validateBody from "../middleware/validation/zod";
 import {
   activateCardSchema,
@@ -23,29 +23,31 @@ router.post(
   "/cards/:id/recharge",
   validadeApiKeyHeader,
   validateBody(rechargeCardSchema),
-  verifyCardIsValid,
+  verifyCardIsValidByParams,
   cardsController.rechargeCard,
 );
 
 router.post(
   "/cards/:id/activate",
   validateBody(activateCardSchema),
-  verifyCardIsValid,
+  verifyCardIsValidByParams,
   cardsController.activateCard,
 );
 
 router.post(
   "/cards/:id/block",
   validateBody(passwordBodySchema),
-  verifyCardIsValid,
+  verifyCardIsValidByParams,
   cardsController.blockCard,
 );
 
 router.post(
   "/cards/:id/unblock",
   validateBody(passwordBodySchema),
-  verifyCardIsValid,
+  verifyCardIsValidByParams,
   cardsController.unblockCard,
 );
+
+router.get("/cards/:id/balance", cardsController.getBalance);
 
 export default router;

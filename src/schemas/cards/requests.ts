@@ -29,24 +29,30 @@ export interface CreateCardRequest extends Request {
 
 type IdParams = { [key: string]: string } & { id: number };
 
-export interface CardIdRequest extends Request {
+export interface CardIdParamReq extends Request {
   params: IdParams;
 }
 
-export interface ActivateCardReq extends CardIdRequest {
+export interface CardIdBodyReq extends Request {
+  body: {
+    cardId: number;
+  };
+}
+
+export interface ActivateCardReq extends CardIdParamReq {
   body: {
     cvc: string;
     password: string;
   };
 }
 
-export interface PasswordBodyReq extends CardIdRequest {
+export interface PasswordBodyReq extends CardIdParamReq {
   body: {
     password: string;
   };
 }
 
-export interface RechargeCardReq extends CardIdRequest {
+export interface RechargeCardReq extends CardIdParamReq {
   body: {
     amount: number;
   };

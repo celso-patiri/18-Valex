@@ -1,11 +1,16 @@
 import { Response } from "express";
-import { ForbiddenException, UnauthorizedException } from "../common/exceptions/http-exceptions";
+import {
+  ForbiddenException,
+  NotFoundException,
+  UnauthorizedException,
+} from "../common/exceptions/http-exceptions";
 import {
   ActivateCardReq,
   PasswordBodyReq,
   CreateCardRequest,
   ValidCardRes,
   RechargeCardReq,
+  CardIdParamReq,
 } from "../schemas/cards/requests";
 import cardsService from "../services/cards.service";
 import employeesService from "../services/employees.service";
@@ -69,10 +74,21 @@ const rechargeCard = async (req: RechargeCardReq, res: ValidCardRes) => {
   res.sendStatus(204);
 };
 
+const getBalance = async (req: CardIdParamReq, res: Response) => {
+  const { id } = req.params;
+
+  const card = await cardsService.findById(id);
+  if (!card) throw new NotFoundException("Card not found");
+
+  const result = await cardsService.getBalance(id);
+  res.status(200).send(result);
+};
+
 export default {
   createCard,
   activateCard,
   blockCard,
   unblockCard,
   rechargeCard,
+  getBalance,
 };

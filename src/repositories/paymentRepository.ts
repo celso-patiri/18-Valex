@@ -1,4 +1,4 @@
-import { connection } from "../database.js";
+import { connection } from "../database";
 
 export interface Payment {
   id: number;
@@ -19,7 +19,7 @@ export async function findByCardId(cardId: number) {
       JOIN businesses ON businesses.id=payments."businessId"
      WHERE "cardId"=$1
     `,
-    [cardId]
+    [cardId],
   );
 
   return result.rows;
@@ -30,6 +30,6 @@ export async function insert(paymentData: PaymentInsertData) {
 
   connection.query<any, [number, number, number]>(
     `INSERT INTO payments ("cardId", "businessId", amount) VALUES ($1, $2, $3)`,
-    [cardId, businessId, amount]
+    [cardId, businessId, amount],
   );
 }

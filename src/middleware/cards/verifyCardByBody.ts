@@ -1,16 +1,16 @@
 import { NextFunction, Response } from "express";
 import { NotFoundException } from "../../common/exceptions/http-exceptions";
-import { CardIdRequest } from "../../schemas/cards/requests";
+import { CardIdBodyReq } from "../../schemas/cards/requests";
 import cardsService from "../../services/cards.service";
 
-export default async function verifyCardIsValid(
-  req: CardIdRequest,
+export default async function verifyCardIsValidByBody(
+  req: CardIdBodyReq,
   res: Response,
   next: NextFunction,
 ) {
-  const { id } = req.params;
+  const { cardId } = req.body;
 
-  const card = await cardsService.findById(+id);
+  const card = await cardsService.findById(+cardId);
   if (!card) throw new NotFoundException("Card is not registered");
 
   await cardsService.verifyCardExpiration(card);

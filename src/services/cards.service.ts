@@ -3,6 +3,7 @@ import { Card, TransactionTypes } from "../schemas/cards/types";
 import { Employee } from "../schemas/employee/types";
 import * as cardsRepository from "../repositories/cardRepository";
 import * as rechargesRepository from "../repositories/rechargeRepository";
+import * as paymentRepository from "../repositories/paymentRepository";
 import Lodash from "lodash";
 import Cryptr from "cryptr";
 import { ForbiddenException, UnauthorizedException } from "../common/exceptions/http-exceptions";
@@ -92,6 +93,22 @@ const rechardCard = async (cardId: number, amount: number) => {
   await rechargesRepository.insert({ cardId, amount });
 };
 
+const getBalance = async (cardId: number) => {
+  const recharges = await rechargesRepository.findByCardId(cardId);
+  const transactions = await paymentRepository.findByCardId(cardId);
+
+  const totalIncome = recharges
+    .map((recharge) => recharge.amount)
+    .reduce((sum, amount) => sum + amount, 0);
+
+  const totalExpense = transactions
+    .map((transaction) => transaction.amount)
+    .reduce((sum, amount) => sum + amount, 0);
+
+  const balance = totalIncome - totalExpense;
+  return { balance, transactions, recharges };
+};
+
 export default {
   createCard,
   findById,
@@ -101,4 +118,5 @@ export default {
   validatePassword,
   updateBlockedStatus,
   rechardCard,
+  getBalance,
 };
