@@ -1,4 +1,4 @@
-import { ForbiddenException, NotFoundException } from "../common/exceptions/http-exceptions";
+import { ForbiddenException, NotFoundException } from "../exceptions/http-exceptions";
 import * as businessRepository from "../repositories/businessRepository";
 import { TransactionTypes } from "../schemas/cards/types";
 

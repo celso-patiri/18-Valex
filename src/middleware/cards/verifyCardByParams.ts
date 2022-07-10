@@ -1,5 +1,5 @@
 import { NextFunction, Response } from "express";
-import { NotFoundException } from "../../common/exceptions/http-exceptions";
+import { NotFoundException } from "../../exceptions/http-exceptions";
 import { CardIdParamReq } from "../../schemas/cards/requests";
 import cardsService from "../../services/cards.service";
 

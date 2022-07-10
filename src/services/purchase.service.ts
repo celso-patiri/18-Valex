@@ -1,4 +1,4 @@
-import { ForbiddenException } from "../common/exceptions/http-exceptions";
+import { ForbiddenException } from "../exceptions/http-exceptions";
 import cardsService from "./cards.service";
 import * as paymentsRepository from "../repositories/paymentRepository";
 

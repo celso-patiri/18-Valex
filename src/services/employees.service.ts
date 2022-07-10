@@ -1,4 +1,4 @@
-import { ForbiddenException } from "../common/exceptions/http-exceptions";
+import { ForbiddenException } from "../exceptions/http-exceptions";
 import * as employeesRepository from "../repositories/employeeRepository";
 import * as cardsRepository from "../repositories/cardRepository";
 import { TransactionTypes } from "../schemas/cards/types";

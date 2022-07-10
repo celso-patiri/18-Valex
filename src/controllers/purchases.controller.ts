@@ -1,4 +1,4 @@
-import { ForbiddenException } from "../common/exceptions/http-exceptions";
+import { ForbiddenException } from "../exceptions/http-exceptions";
 import { ValidCardRes } from "../schemas/cards/requests";
 import { MakePurchaseReq, OnlinePurchaseReq } from "../schemas/purchase/requests";
 import businessService from "../services/business.service";

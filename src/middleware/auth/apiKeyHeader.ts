@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { UnauthorizedException } from "../../common/exceptions/http-exceptions";
+import { UnauthorizedException } from "../../exceptions/http-exceptions";
 import companiesService from "../../services/companies.service";
 
 export default async function validadeApiKeyHeader(

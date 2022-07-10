@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { HttpException } from "../../common/exceptions/http-exceptions";
+import { HttpException } from "../../exceptions/http-exceptions";
 
 interface DynamicLog {
   [key: string]: any;

@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import Cryptr from "cryptr";
-import { ForbiddenException, UnauthorizedException } from "../common/exceptions/http-exceptions";
+import { ForbiddenException, UnauthorizedException } from "../exceptions/http-exceptions";
 import * as cardsRepository from "../repositories/cardRepository";
 import * as paymentRepository from "../repositories/paymentRepository";
 import * as rechargesRepository from "../repositories/rechargeRepository";

@@ -3,7 +3,7 @@ import {
   ForbiddenException,
   NotFoundException,
   UnauthorizedException,
-} from "../common/exceptions/http-exceptions";
+} from "../exceptions/http-exceptions";
 import {
   ActivateCardReq,
   PasswordBodyReq,
