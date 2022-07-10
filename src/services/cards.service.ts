@@ -81,8 +81,8 @@ const registerPassword = async (cardId: number, password: string) => {
 
 const validatePassword = (password: string, encryptedPassword?: string) => {
   if (!encryptedPassword) throw new ForbiddenException("Card is not activated");
-  const decryptedPassword = cryptr.decrypt(encryptedPassword);
-  if (password != decryptedPassword) throw new UnauthorizedException("Invalid password");
+  if (password != cryptr.decrypt(encryptedPassword))
+    throw new UnauthorizedException("Invalid password");
 };
 
 const updateBlockedStatus = async (cardId: number, block: boolean) => {
@@ -109,6 +109,15 @@ const getBalance = async (cardId: number) => {
   return { balance, transactions, recharges };
 };
 
+const validateCardDetails = async (
+  number: string,
+  cardholderName: string,
+  expirationDate: string,
+) => {
+  const card = await cardsRepository.findByCardDetails(number, cardholderName, expirationDate);
+  if (!card) throw new ForbiddenException("Invalid card details");
+};
+
 export default {
   createCard,
   findById,
@@ -119,4 +128,5 @@ export default {
   updateBlockedStatus,
   rechardCard,
   getBalance,
+  validateCardDetails,
 };

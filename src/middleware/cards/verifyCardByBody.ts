@@ -18,3 +18,5 @@ export default async function verifyCardIsValidByBody(
   res.locals.card = card;
   next();
 }
+
+export const teste = () => verifyCardIsValidByBody;
