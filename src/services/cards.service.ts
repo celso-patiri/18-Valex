@@ -5,8 +5,8 @@ import * as rechargesRepository from "../repositories/rechargeRepository";
 import { Card, TransactionTypes } from "../schemas/cards/types";
 import { Employee } from "../schemas/employee/types";
 import employeesService from "./employees.service";
-import * as faker from "../utils/faker.utils";
 import cryptr from "../utils/cryptr.utils";
+import * as faker from "../utils/faker.utils";
 import * as utils from "../utils/cards.utils";
 
 const createCard = async (type: TransactionTypes, employee: Employee) => {

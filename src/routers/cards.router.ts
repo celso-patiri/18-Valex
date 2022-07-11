@@ -63,7 +63,7 @@ router.delete(
   "/cards/:id",
   validateBody(virtualCardSchema),
   verifyCardIsValidByParams,
-  cardsController.createVirtualCard,
+  cardsController.deleteVirtualCard,
 );
 
 export default router;
