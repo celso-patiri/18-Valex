@@ -14,7 +14,7 @@ export interface Card {
 
 export enum TransactionTypesEnum {
   groceries = "groceries",
-  restaurants = "restaurants",
+  restaurants = "restaurant",
   transport = "transport",
   education = "education",
   health = "health",
