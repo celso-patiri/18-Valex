@@ -24,3 +24,21 @@ export const getExpirationDate = () => {
   const { month, year } = getCurrentYearAndMonth();
   return `${month}/${year + 5}`;
 };
+
+interface ICreditEntry {
+  amount: number;
+}
+
+const calculateTotal = <T extends ICreditEntry>(entryList: T[]) => {
+  return entryList.map((entry) => entry.amount).reduce((sum, amount) => sum + amount, 0);
+};
+
+export const calculateBalance = <T1 extends ICreditEntry, T2 extends T1>(
+  recharges: T1[],
+  transactions: T2[],
+) => {
+  const totalIncome = calculateTotal(recharges);
+  const totalExpense = calculateTotal(transactions);
+
+  return totalIncome - totalExpense;
+};

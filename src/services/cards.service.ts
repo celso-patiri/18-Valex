@@ -81,15 +81,8 @@ const getBalance = async (cardId: number) => {
   const recharges = await rechargesRepository.findByCardId(cardId);
   const transactions = await paymentRepository.findByCardId(cardId);
 
-  const totalIncome = recharges
-    .map((recharge) => recharge.amount)
-    .reduce((sum, amount) => sum + amount, 0);
+  const balance = utils.calculateBalance(recharges, transactions);
 
-  const totalExpense = transactions
-    .map((transaction) => transaction.amount)
-    .reduce((sum, amount) => sum + amount, 0);
-
-  const balance = totalIncome - totalExpense;
   return { balance, transactions, recharges };
 };
 
