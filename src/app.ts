@@ -3,8 +3,7 @@ import "dotenv/config";
 import "express-async-errors";
 import express, { json } from "express";
 import AppRouter from "./routers/index";
-import ErrorHandler from "./middleware/error/errorHandler";
-import ErrorLogger from "./middleware/error/errorLogger";
+import { errorHandler, errorLogger } from "./middleware/error";
 
 const app = express();
 
@@ -13,7 +12,7 @@ app.use(cors());
 
 app.use(AppRouter);
 
-app.use(ErrorLogger);
-app.use(ErrorHandler);
+app.use(errorLogger);
+app.use(errorHandler);
 
 export default app;
