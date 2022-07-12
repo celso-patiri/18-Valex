@@ -30,50 +30,50 @@
   - [X] **POST** `/cards`
     - headers: `x-api-key`
     - body: 
-    ```JSON
+    ```TypeScript
       empoyeeId: number,
       type: enum
     ```
   - [X] **POST** `/cards/:id/activate`
     - body: 
-    ```JSON
+    ```TypeScript
       cvc: string,
       password: string
     ```
   - [X] **POST** `/cards/:id/recharge`
     - headers: `x-api-key`
     - body: 
-    ```JSON
+    ```TypeScript
       amount: number
     ```
     
   - [X] **POST** `/cards/:id/block`
     - body: 
-    ```JSON
+    ```TypeScript
       password: string
     ```
   - [X] **POST** `/cards/:id/unblock`
     - body: 
-    ```JSON
+    ```TypeScript
       password: string
     ```
   - [X] **POST** `/cards/virtual`
     - body: 
-    ```JSON
+    ```TypeScript
       id: number,
       password: string
     ```
   - [X] **GET** `/cards/:id/balance`
   - [X] **DELETE** `/cards/:id`
     - body: 
-    ```JSON
+    ```TypeScript
       id: number,
       password: string
     ```
 
   - [X] **POST** `/purchase`
     - body: 
-    ```JSON
+    ```TypeScript
       cardId: number
       password: string
       businessId: number
@@ -81,7 +81,7 @@
     ```
   - [X] **POST** `/purchase/online`
     - body: 
-    ```JSON
+    ```TypeScript
       cardId: number
       number: string
       name: string
