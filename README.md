@@ -28,16 +28,68 @@
 ## Routes
 
   - [X] **POST** `/cards`
+    - headers: `x-api-key`
+    - body: 
+    ```JSON
+      empoyeeId: number,
+      type: enum
+    ```
   - [X] **POST** `/cards/:id/activate`
+    - body: 
+    ```JSON
+      cvc: string,
+      password: string
+    ```
   - [X] **POST** `/cards/:id/recharge`
+    - headers: `x-api-key`
+    - body: 
+    ```JSON
+      amount: number
+    ```
+    
   - [X] **POST** `/cards/:id/block`
+    - body: 
+    ```JSON
+      password: string
+    ```
   - [X] **POST** `/cards/:id/unblock`
+    - body: 
+    ```JSON
+      password: string
+    ```
   - [X] **POST** `/cards/virtual`
+    - body: 
+    ```JSON
+      id: number,
+      password: string
+    ```
   - [X] **GET** `/cards/:id/balance`
   - [X] **DELETE** `/cards/:id`
+    - body: 
+    ```JSON
+      id: number,
+      password: string
+    ```
 
   - [X] **POST** `/purchase`
+    - body: 
+    ```JSON
+      cardId: number
+      password: string
+      businessId: number
+      amount: number
+    ```
   - [X] **POST** `/purchase/online`
+    - body: 
+    ```JSON
+      cardId: number
+      number: string
+      name: string
+      expirationDate: string
+      securityCode: string
+      businessId: number
+      amount: number
+    ```
   
   
 
