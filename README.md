@@ -31,7 +31,7 @@
     - headers: `x-api-key`
     - body: 
     ```TypeScript
-      empoyeeId: number,
+      employeeId: number,
       type: enum
     ```
   - [X] **POST** `/cards/:id/activate`
